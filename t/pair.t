@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 use Test::More tests => 26;
-use List::Util qw(pairgrep pairfirst pairmap pairs unpairs pairkeys pairvalues);
+use List::Util::XS qw(pairgrep pairfirst pairmap pairs unpairs pairkeys pairvalues);
 
 no warnings 'misc'; # avoid "Odd number of elements" warnings most of the time
 

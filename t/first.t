@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use List::Util qw(first);
+use List::Util::XS qw(first);
 use Test::More;
 plan tests => 22 + ($::PERL_ONLY ? 0 : 2);
 my $v;
@@ -46,7 +46,7 @@ is($v, 12, 'return from loop');
 
 # Does it work from another package?
 { package Foo;
-  ::is(List::Util::first(sub{$_>4},(1..4,24)), 24, 'other package');
+  ::is(List::Util::XS::first(sub{$_>4},(1..4,24)), 24, 'other package');
 }
 
 # Can we undefine a first sub while it's running?
@@ -94,9 +94,9 @@ SKIP: {
 # (and more flexibly) in a way that we can't emulate from XS.
 if (!$::PERL_ONLY) { SKIP: {
 
-    $List::Util::REAL_MULTICALL ||= 0; # Avoid use only once
+    $List::Util::XS::REAL_MULTICALL ||= 0; # Avoid use only once
     skip("Poor man's MULTICALL can't cope", 2)
-      if !$List::Util::REAL_MULTICALL;
+      if !$List::Util::XS::REAL_MULTICALL;
 
     # Can we goto a label from the 'first' sub?
     eval {()=first{goto foo} 1,2; foo: 1};

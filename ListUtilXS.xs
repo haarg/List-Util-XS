@@ -50,7 +50,7 @@ static enum slu_accum accum_type(SV *sv) {
     return ACC_NV;
 }
 
-MODULE=List::Util::XS       PACKAGE=List::Util
+MODULE=List::Util::XS       PACKAGE=List::Util::XS
 
 void
 min(...)
@@ -520,7 +520,7 @@ PPCODE:
 {
     int argi = 0;
     int reti = 0;
-    HV *pairstash = get_hv("List::Util::_Pair::", GV_ADD);
+    HV *pairstash = get_hv("List::Util::XS::_Pair::", GV_ADD);
 
     if(items % 2 && ckWARN(WARN_MISC))
         warn("Odd number of elements in pairs");
@@ -565,9 +565,9 @@ PPCODE:
         SvGETMAGIC(pair);
 
         if(SvTYPE(pair) != SVt_RV)
-            croak("Not a reference at List::Util::unpack() argument %d", i);
+            croak("Not a reference at List::Util::XS::unpairs() argument %d", i);
         if(SvTYPE(SvRV(pair)) != SVt_PVAV)
-            croak("Not an ARRAY reference at List::Util::unpack() argument %d", i);
+            croak("Not an ARRAY reference at List::Util::XS::unpairs() argument %d", i);
 
         /* TODO: assert pair is an ARRAY ref */
         pairav = (AV *)SvRV(pair);
@@ -1075,11 +1075,11 @@ CODE:
 
 BOOT:
 {
-    HV *lu_stash = gv_stashpvn("List::Util", 10, TRUE);
+    HV *lu_stash = gv_stashpvn("List::Util::XS", 10, TRUE);
     GV *rmcgv = *(GV**)hv_fetch(lu_stash, "REAL_MULTICALL", 14, TRUE);
     SV *rmcsv;
     if(SvTYPE(rmcgv) != SVt_PVGV)
-        gv_init(rmcgv, lu_stash, "List::Util", 10, TRUE);
+        gv_init(rmcgv, lu_stash, "List::Util::XS", 10, TRUE);
     rmcsv = GvSVn(rmcgv);
 #ifdef REAL_MULTICALL
     sv_setsv(rmcsv, &PL_sv_yes);

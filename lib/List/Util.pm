@@ -8,7 +8,7 @@ package List::Util;
 
 use strict;
 use warnings;
-use List::Util::XS ();
+use List::Util::XS;
 require Exporter;
 
 our @ISA        = qw(Exporter);
@@ -31,10 +31,6 @@ sub import
 
   goto &Exporter::import;
 }
-
-# For objects returned by pairs()
-sub List::Util::_Pair::key   { shift->[0] }
-sub List::Util::_Pair::value { shift->[1] }
 
 =head1 NAME
 

@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 use Test::More tests => 30;
-use List::Util qw( uniqnum uniqstr uniq );
+use List::Util::XS qw( uniqnum uniqstr uniq );
 
 use Tie::Array;
 

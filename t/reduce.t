@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use List::Util qw(reduce min);
+use List::Util::XS qw(reduce min);
 use Test::More;
 plan tests => 30 + ($::PERL_ONLY ? 0 : 2);
 
@@ -72,7 +72,7 @@ is($v, 12, 'return from loop');
 # Does it work from another package?
 { package Foo;
   $a = $b;
-  ::is((List::Util::reduce {$a*$b} (1..4)), 24, 'other package');
+  ::is((List::Util::XS::reduce {$a*$b} (1..4)), 24, 'other package');
 }
 
 # Can we undefine a reduce sub while it's running?
@@ -130,9 +130,9 @@ SKIP: {
 # (and more flexibly) in a way that we can't emulate from XS.
 if (!$::PERL_ONLY) { SKIP: {
 
-    $List::Util::REAL_MULTICALL ||= 0; # Avoid use only once
+    $List::Util::XS::REAL_MULTICALL ||= 0; # Avoid use only once
     skip("Poor man's MULTICALL can't cope", 2)
-      if !$List::Util::REAL_MULTICALL;
+      if !$List::Util::XS::REAL_MULTICALL;
 
     # Can we goto a label from the reduction sub?
     eval {()=reduce{goto foo} 1,2; foo: 1};

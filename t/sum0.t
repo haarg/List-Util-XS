@@ -5,7 +5,7 @@ use warnings;
 
 use Test::More tests => 3;
 
-use List::Util qw( sum0 );
+use List::Util::XS qw( sum0 );
 
 my $v = sum0;
 is( $v, 0, 'no args' );
