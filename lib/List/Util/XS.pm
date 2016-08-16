@@ -39,27 +39,24 @@ __END__
 
 =head1 NAME
 
-List::Util::XS - Indicate if List::Util was compiled with a C compiler
+List::Util::XS - Accelerated implementation of L<List::Util> subs
 
 =head1 SYNOPSIS
 
-    use List::Util::XS 1.20;
+    use List::Util::XS 1.46;
 
 =head1 DESCRIPTION
 
-C<List::Util::XS> can be used as a dependency to ensure List::Util was
-installed using a C compiler and that the XS version is installed.
+C<List::Util::XS> contains XS accelerated implementations of the L<List::Util>
+subroutines.  It can be used as a dependency to ensure that these faster
+versions of the subs are available.  This requires a C compiler.
 
-During installation C<$List::Util::XS::VERSION> will be set to
-C<undef> if the XS was not compiled.
-
-Starting with release 1.23_03, Scalar-List-Util is B<always> using
-the XS implementation, but for backwards compatibility, we still
-ship the C<List::Util::XS> module which just loads C<List::Util>.
+Using L<List::Util> should be preferred for most code, as it will automatically
+use this module when possible to provide the faster implementations.
 
 =head1 SEE ALSO
 
-L<Scalar::Util>, L<List::Util>, L<List::MoreUtils>
+L<Scalar::Util>, L<List::Util>
 
 =head1 COPYRIGHT
 
