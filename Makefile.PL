@@ -6,12 +6,11 @@ use ExtUtils::MakeMaker;
 my $PERL_CORE = grep { $_ eq 'PERL_CORE=1' } @ARGV;
 
 WriteMakefile(
-  NAME         => q[List::Util],
+  NAME         => q[List::Util::XS],
   ABSTRACT     => q[Common List utility subroutines],
   AUTHOR       => q[Graham Barr <gbarr@cpan.org>],
   DEFINE       => q[-DPERL_EXT],
-  DISTNAME     => q[Scalar-List-Utils],
-  VERSION_FROM => 'lib/List/Util.pm',
+  VERSION_FROM => 'lib/List/Util/XS.pm',
 
   # We go through the ListUtil.xs trickery to foil platforms
   # that have the feature combination of
@@ -21,8 +20,8 @@ WriteMakefile(
   # This means that we can't have the top-level util.o
   # and the extension-level Util.o in the same build.
   # One such platform is the POSIX-BC BS2000 EBCDIC mainframe platform.
-  XS     => {'ListUtil.xs' => 'ListUtil.c'},
-  OBJECT => 'ListUtil$(OBJ_EXT)',
+  XS     => {'ListUtilXS.xs' => 'ListUtilXS.c'},
+  OBJECT => 'ListUtilXS$(OBJ_EXT)',
   ( $PERL_CORE
     ? ()
     : (
@@ -36,13 +35,13 @@ WriteMakefile(
             dynamic_config => 0,
             resources => {    ##
               repository => {
-                url => 'https://github.com/Scalar-List-Utils/List-Util.git',
-                web => 'https://github.com/Scalar-List-Utils/List-Util',
+                url => 'https://github.com/Scalar-List-Utils/List-Util-XS.git',
+                web => 'https://github.com/Scalar-List-Utils/List-Util-XS',
                 type => 'git',
               },
               bugtracker => {
                 mailto => 'bug-Scalar-List-Utils@rt.cpan.org',
-                web => 'https://rt.cpan.org/Public/Dist/Display.html?Name=Scalar-List-Utils',
+                web => 'https://rt.cpan.org/Public/Dist/Display.html?Name=List-Util-XS',
               },
             },
           }

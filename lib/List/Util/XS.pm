@@ -4,7 +4,11 @@ use warnings;
 use List::Util;
 
 our $VERSION = "1.45";       # FIXUP
+our $XS_VERSION = $VERSION;
 $VERSION = eval $VERSION;    # FIXUP
+
+require XSLoader;
+XSLoader::load(__PACKAGE__, $XS_VERSION);
 
 1;
 __END__

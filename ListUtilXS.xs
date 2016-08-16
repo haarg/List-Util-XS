@@ -50,7 +50,7 @@ static enum slu_accum accum_type(SV *sv) {
     return ACC_NV;
 }
 
-MODULE=List::Util       PACKAGE=List::Util
+MODULE=List::Util::XS       PACKAGE=List::Util
 
 void
 min(...)
