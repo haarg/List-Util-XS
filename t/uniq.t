@@ -147,7 +147,19 @@ is( scalar( uniqstr qw( a b c d a b e ) ), 5, 'uniqstr() in scalar context' );
     sub new { bless { num => $_[1] }, $_[0] }
 
     package main;
-    use Scalar::Util qw( refaddr );
+    {
+        package PackageWithoutOverloads;
+    }
+    sub refaddr ($) {
+        my $o = shift;
+        my $class = ref $o;
+        return undef
+            if !$class or !UNIVERSAL::can($o, 'can');
+        bless $o, "PackageWithoutOverloads";
+        my $addr = int $o;
+        bless $o, $class;
+        return $addr;
+    }
 
     my @nums = map { Numify->new( $_ ) } qw( 2 2 5 );
 

@@ -7,7 +7,7 @@ my $PERL_CORE = grep { $_ eq 'PERL_CORE=1' } @ARGV;
 
 WriteMakefile(
   NAME         => q[List::Util],
-  ABSTRACT     => q[Common Scalar and List utility subroutines],
+  ABSTRACT     => q[Common List utility subroutines],
   AUTHOR       => q[Graham Barr <gbarr@cpan.org>],
   DEFINE       => q[-DPERL_EXT],
   DISTNAME     => q[Scalar-List-Utils],
@@ -36,8 +36,8 @@ WriteMakefile(
             dynamic_config => 0,
             resources => {    ##
               repository => {
-                url => 'https://github.com/Scalar-List-Utils/Scalar-List-Utils.git',
-                web => 'https://github.com/Scalar-List-Utils/Scalar-List-Utils',
+                url => 'https://github.com/Scalar-List-Utils/List-Util.git',
+                web => 'https://github.com/Scalar-List-Utils/List-Util',
                 type => 'git',
               },
               bugtracker => {
